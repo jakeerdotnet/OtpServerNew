@@ -18,13 +18,13 @@ router.post('/', (req, res) => {
     });
 
     data.variables_values = generateSixDigitRandomNumber();
-    // req.form(data);
+    req.form(data);
 
-    // req.end(function (res) {
-    // if (res.error) throw new Error(res.error);
+    req.end(function (res) {
+    if (res.error) throw new Error(res.error);
 
-    // console.log(res.body);
-    // });
+    console.log(res.body);
+    });
 
 
 
