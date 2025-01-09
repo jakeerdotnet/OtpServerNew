@@ -21,8 +21,9 @@ router.post('/', (req, res) => {
     req.form(data);
 
     req.end(function (res) {
-    if (res.error) throw new Error(res.error);
+    if (res.error) data.Error = res.error;
 
+    data.Message = res.body
     console.log(res.body);
     });
 
