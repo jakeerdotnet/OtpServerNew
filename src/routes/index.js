@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
     "authorization": "QYrg3nNEohqxDA41ICbmuPUtXFz0JB8OVk2fdlZ7vWKiMcyaR6Dq9OHNAcTLkQ6SCguFt8mBzXRa1y2E"
     });
 
-    data.variables_values = generateSixDigitRandomNumber();
+    data.variables_values = generateSixDigitRandomNumber().toString();
     req.form(data);
 
     req.end(function (res) {
@@ -25,8 +25,6 @@ router.post('/', (req, res) => {
 
     console.log(res.body);
     });
-
-
 
     res.send(data);
 });
