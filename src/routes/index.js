@@ -8,26 +8,30 @@ router.get('/', (req, res) => {
 });
 
 // POST method route
-router.post('/', (req, res) => {
-    const data = req.body;
+router.post('/', (request, response) => {
+    const data = request.body;
 
-    var req = unirest("POST", "https://www.fast2sms.com/dev/bulkV2");
+    var otpRequest = unirest("POST", "https://www.fast2sms.com/dev/bulkV2");
 
-    req.headers({
+    otpRequest.headers({
     "authorization": "QYrg3nNEohqxDA41ICbmuPUtXFz0JB8OVk2fdlZ7vWKiMcyaR6Dq9OHNAcTLkQ6SCguFt8mBzXRa1y2E"
     });
 
     data.variables_values = generateSixDigitRandomNumber().toString();
-    req.form(data);
+    try {
+        otpRequest.form(data);
 
-    req.end(function (res) {
-    if (res.error) data.Error = res.error;
-
-    data.Message = res.body
-    console.log(res.body);
-    });
-
-    res.send(data);
+        otpRequest.end(function (otpResponse) {
+        if (otpResponse.error) 
+            data.Error = otpResponse.error;
+    
+        data.message = otpResponse.body
+        console.log(otpResponse.body);
+        response.send(data);
+        });
+      } catch (error) {
+        console.log(oerror.message);
+      }
 });
 
 function generateSixDigitRandomNumber() {
